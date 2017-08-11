@@ -76,7 +76,7 @@ class MyHandler(BaseHTTPRequestHandler):
         # Call last intent if 'all' is detected
         if intent['name'] == 'all':
             message = (getattr(self.pluginsList, self.lastRequest['intent']['name'])
-                       .process(entities, self.lastRequest)
+                       .process(entities, intent['name'], self.lastRequest)
                        )
             self.wfile.write(message['speech'].encode('utf8'))
             return
@@ -97,7 +97,8 @@ def run():
     server_address = ('0.0.0.0', 10001)
     httpd = HTTPServer(server_address, MyHandler)
     MyHandler.pluginsList = PluginsList()
-    MyHandler.lastRequest = {}
+    MyHandler.lastRequest = { 'intent': { 'name': ''}}
+    
     try:
         logging.info('CORE - Running Jarvis backend')
         httpd.serve_forever()

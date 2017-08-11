@@ -219,8 +219,8 @@ class WeatherWunderground():
         return url
 
 
-    def process(self, entities, lastRequest=None):
-        if self.waitState == 'homonyms':
+    def process(self, entities, currentIntent=None, lastRequest=None):
+        if currentIntent == 'all' and self.waitState == 'homonyms':
             url = self.getCityByState(entities['state'])
             if url is None:
                 return {
