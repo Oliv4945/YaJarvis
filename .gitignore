@@ -1,0 +1,9 @@
+.cache
+.coverage
+*.pyc
+__pycache__
+backup
+config.json
+logs
+nohup.out
+venv

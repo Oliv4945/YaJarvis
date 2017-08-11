@@ -1,0 +1,11 @@
+{
+	"weatherWunderground":
+	{
+		// Api key from Wunderground
+		"apiKey":   "YOUR_API_KEY",
+		// Returned speech language
+		"language": "FR",
+		// Country to search cities
+		"country":  "France"
+	}
+}

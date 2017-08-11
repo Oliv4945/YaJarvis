@@ -1,0 +1,195 @@
+{
+  "rasa_nlu_data": {
+    "regex_features": [
+      {
+        "name": "zipcode",
+        "pattern": "[0-9]{5}"
+      }
+    ],
+    "entity_synonyms": [
+      {
+        "value": "temperature",
+        "synonyms": ["chaud", "froid", "temperature"]
+      }
+    ],
+    "common_examples": [
+      {
+        "text": "hey", 
+        "intent": "greet", 
+        "entities": []
+      }, 
+      {
+        "text": "salut", 
+        "intent": "greet", 
+        "entities": []
+      }, 
+      {
+        "text": "bonjour",
+        "intent": "greet", 
+        "entities": []
+      }, 
+      {
+        "text": "hello", 
+        "intent": "greet", 
+        "entities": []
+      }, 
+      {
+        "text": "yes", 
+        "intent": "affirm", 
+        "entities": []
+      }, 
+      {
+        "text": "yep", 
+        "intent": "affirm", 
+        "entities": []
+      }, 
+      {
+        "text": "oui", 
+        "intent": "affirm", 
+        "entities": []
+      },
+      {
+        "text": "ok",
+        "intent": "affirm",
+        "entities": []
+      },
+      {
+        "text": "bien",
+        "intent": "affirm",
+        "entities": []
+      },
+      {
+        "text": "bien, merci",
+        "intent": "affirm",
+        "entities": []
+      },
+      {
+        "text": "correct",
+        "intent": "affirm",
+        "entities": []
+      },
+      {
+        "text": "bon choix",
+        "intent": "affirm",
+        "entities": []
+      },
+      {
+        "text": "Quel temps fait-il à Paris",
+        "intent": "weather",
+        "entities":[
+          {
+            "start": 14,
+            "end": 19,
+            "value": "temps",
+            "entity": "weatherType"
+          }
+
+        ] 
+      },
+      {
+        "text": "quelle est la meteo",
+        "intent": "weather",
+        "entities":[
+          {
+            "start": 14,
+            "end": 19,
+            "value": "meteo",
+            "entity": "weatherType"
+          }
+
+        ] 
+      },
+      {
+        "text": "quel temps fait il",
+        "intent": "weather",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "temps",
+            "entity": "weatherType"
+          }
+        ]
+      },
+      {
+        "text": "Quelle est la meteo à Grenoble",
+        "intent": "weather",
+        "entities": [
+          {
+            "start": 14,
+            "end": 19,
+            "value": "meteo",
+            "entity": "weatherType"
+          },
+          {
+            "start": 22,
+            "end": 30,
+            "value": "Grenoble",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "Quelle est la météo à Gap",
+        "intent": "weatherType",
+        "entities": [
+          {
+            "start": 14,
+            "end": 19,
+            "value": "meteo",
+            "entity": "weatherType"
+          },
+          {
+            "start": 22,
+            "end": 25,
+            "value": "Gap",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "Quel temps fait il à Grenoble",
+        "intent": "weather",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "temps",
+            "entity": "weatherType"
+          },
+          {
+            "start": 21,
+            "end": 29,
+            "value": "Grenoble",
+            "entity": "location"
+          }
+        ]
+      },
+      {
+        "text": "bye", 
+        "intent": "goodbye", 
+        "entities": []
+      }, 
+      {
+        "text": "aurevoir", 
+        "intent": "goodbye", 
+        "entities": []
+      }, 
+      {
+        "text": "a+", 
+        "intent": "goodbye", 
+        "entities": []
+      }, 
+      {
+        "text": "stop", 
+        "intent": "goodbye", 
+        "entities": []
+      }, 
+      {
+        "text": "fin", 
+        "intent": "goodbye", 
+        "entities": []
+      }
+    ]
+  }
+}

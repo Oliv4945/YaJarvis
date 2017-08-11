@@ -1,0 +1,187 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "entities": [],
+        "text": "hey",
+        "intent": "greet"
+      },
+      {
+        "entities": [],
+        "text": "salut",
+        "intent": "greet"
+      },
+      {
+        "entities": [],
+        "text": "bonjour",
+        "intent": "greet"
+      },
+      {
+        "entities": [],
+        "text": "hello",
+        "intent": "greet"
+      },
+      {
+        "entities": [],
+        "text": "yes",
+        "intent": "affirm"
+      },
+      {
+        "entities": [],
+        "text": "yep",
+        "intent": "affirm"
+      },
+      {
+        "entities": [],
+        "text": "oui",
+        "intent": "affirm"
+      },
+      {
+        "entities": [],
+        "text": "ok",
+        "intent": "affirm"
+      },
+      {
+        "entities": [],
+        "text": "bien",
+        "intent": "affirm"
+      },
+      {
+        "entities": [],
+        "text": "bien, merci",
+        "intent": "affirm"
+      },
+      {
+        "entities": [],
+        "text": "correct",
+        "intent": "affirm"
+      },
+      {
+        "entities": [],
+        "text": "bon choix",
+        "intent": "affirm"
+      },
+      {
+        "entities": [
+          {
+            "value": "temps",
+            "end": 19,
+            "start": 14,
+            "entity": "weatherType"
+          }
+        ],
+        "text": "Quel temps fait-il \u00e0 Paris",
+        "intent": "weather"
+      },
+      {
+        "entities": [
+          {
+            "value": "meteo",
+            "end": 19,
+            "start": 14,
+            "entity": "weatherType"
+          }
+        ],
+        "text": "quelle est la meteo",
+        "intent": "weather"
+      },
+      {
+        "entities": [
+          {
+            "value": "temps",
+            "end": 10,
+            "start": 5,
+            "entity": "weatherType"
+          }
+        ],
+        "text": "quel temps fait il",
+        "intent": "weather"
+      },
+      {
+        "entities": [
+          {
+            "value": "meteo",
+            "end": 19,
+            "start": 14,
+            "entity": "weatherType"
+          },
+          {
+            "value": "Grenoble",
+            "end": 30,
+            "start": 22,
+            "entity": "location"
+          }
+        ],
+        "text": "Quelle est la meteo \u00e0 Grenoble",
+        "intent": "weather"
+      },
+      {
+        "entities": [
+          {
+            "value": "meteo",
+            "end": 19,
+            "start": 14,
+            "entity": "weatherType"
+          },
+          {
+            "value": "Gap",
+            "end": 25,
+            "start": 22,
+            "entity": "location"
+          }
+        ],
+        "text": "Quelle est la m\u00e9t\u00e9o \u00e0 Gap",
+        "intent": "weatherType"
+      },
+      {
+        "entities": [
+          {
+            "value": "temps",
+            "end": 10,
+            "start": 5,
+            "entity": "weatherType"
+          },
+          {
+            "value": "Grenoble",
+            "end": 29,
+            "start": 21,
+            "entity": "location"
+          }
+        ],
+        "text": "Quel temps fait il \u00e0 Grenoble",
+        "intent": "weather"
+      },
+      {
+        "entities": [],
+        "text": "bye",
+        "intent": "goodbye"
+      },
+      {
+        "entities": [],
+        "text": "aurevoir",
+        "intent": "goodbye"
+      },
+      {
+        "entities": [],
+        "text": "a+",
+        "intent": "goodbye"
+      },
+      {
+        "entities": [],
+        "text": "stop",
+        "intent": "goodbye"
+      },
+      {
+        "entities": [],
+        "text": "fin",
+        "intent": "goodbye"
+      }
+    ],
+    "regex_features": [
+      {
+        "name": "zipcode",
+        "pattern": "[0-9]{5}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+pytest
+requests
+requests_mock
+rasa_nlu
+spacy
+scikit-learn
+scipy 
+sklearn-crfsuite
