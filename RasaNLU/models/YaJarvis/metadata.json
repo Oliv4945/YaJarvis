@@ -1,5 +1,25 @@
 {
+    "entity_synonyms": "entity_synonyms.json",
+    "language": "fr",
+    "pipeline": [
+        "nlp_spacy",
+        "tokenizer_spacy",
+        "intent_entity_featurizer_regex",
+        "intent_featurizer_spacy",
+        "ner_crf",
+        "ner_synonyms",
+        "intent_classifier_sklearn",
+        "ner_spacy"
+    ],
+    "regex_featurizer": "regex_featurizer.json",
+    "trained_at": "20170811-165147",
+    "intent_classifier_sklearn": "intent_classifier.pkl",
+    "training_data": "training_data.json",
+    "spacy_model_name": "fr",
     "entity_extractor_crf": {
+        "model_file": "crf_model.pkl",
+        "version": 1,
+        "BILOU_flag": true,
         "crf_features": [
             [
                 "low",
@@ -27,27 +47,7 @@
                 "pos",
                 "pos2"
             ]
-        ],
-        "BILOU_flag": true,
-        "model_file": "crf_model.pkl",
-        "version": 1
+        ]
     },
-    "trained_at": "20170810-104704",
-    "training_data": "training_data.json",
-    "language": "fr",
-    "pipeline": [
-        "nlp_spacy",
-        "tokenizer_spacy",
-        "intent_entity_featurizer_regex",
-        "intent_featurizer_spacy",
-        "ner_crf",
-        "ner_synonyms",
-        "intent_classifier_sklearn",
-        "ner_spacy"
-    ],
-    "entity_synonyms": "entity_synonyms.json",
-    "intent_classifier_sklearn": "intent_classifier.pkl",
-    "regex_featurizer": "regex_featurizer.json",
-    "rasa_nlu_version": "0.9.1",
-    "spacy_model_name": "fr"
+    "rasa_nlu_version": "0.9.1"
 }

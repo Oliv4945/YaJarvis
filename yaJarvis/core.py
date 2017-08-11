@@ -45,6 +45,16 @@ class MyHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html; charset=UTF-8')
         self.end_headers()
 
+        """
+        # If only one or two  words, pass it to last intent
+        if queryText.count(' ') < 2:
+            message = (getattr(self.pluginsList, self.lastRequest['intent']['name'])
+                       .process({'noRasa':queryText}, self.lastRequest)
+                       )
+            self.wfile.write(message['speech'].encode('utf8'))
+            return
+        """
+
         # Query Rasa NLU and parse results
         data = json.dumps({'q': queryText})
         try:
@@ -63,14 +73,22 @@ class MyHandler(BaseHTTPRequestHandler):
         logging.info('CORE -- intent: %s', intent)
         logging.info('CORE -- entities: %s', entities)
 
-        # Call module
-        message = getattr(self.pluginsList, intent['name']).process(entities)
+        # Call last intent if 'all' is detected
+        if intent['name'] == 'all':
+            message = (getattr(self.pluginsList, self.lastRequest['intent']['name'])
+                       .process(entities, self.lastRequest)
+                       )
+            self.wfile.write(message['speech'].encode('utf8'))
+            return
+        message = (getattr(self.pluginsList, intent['name'])
+                    .process(entities, self.lastRequest)
+                   )
         self.wfile.write(message['speech'].encode('utf8'))
 
         # Save context
-        self.lastRequest.intent = intent
-        self.lastRequest.entities = entities
-        self.lastRequest.keepRunning = message.get('keepRunning', False)
+        self.lastRequest['intent']      = intent
+        self.lastRequest['entities']    = entities
+        self.lastRequest['keepRunning'] = message.get('keepRunning', False)
         return
 
 
@@ -79,9 +97,9 @@ def run():
     server_address = ('0.0.0.0', 10001)
     httpd = HTTPServer(server_address, MyHandler)
     MyHandler.pluginsList = PluginsList()
-    MyHandler.lastRequest = RasaRequest()
+    MyHandler.lastRequest = {}
     try:
-        print('CORE - Running Jarvis backend')
+        logging.info('CORE - Running Jarvis backend')
         httpd.serve_forever()
     except KeyboardInterrupt:
         pass

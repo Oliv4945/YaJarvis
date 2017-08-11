@@ -1,6 +1,6 @@
 [
     {
-        "name": "zipcode",
-        "pattern": "[0-9]{5}"
+        "pattern": "[0-9]{5}",
+        "name": "zipcode"
     }
 ]

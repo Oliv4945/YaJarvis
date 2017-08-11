@@ -6,15 +6,18 @@ import os
 from random import randint
 import re
 import requests
+import string
 
 
 class WeatherWunderground():
     """ Get weather forecast from Wunderground
     """
 
-    apiKey   = ''
-    language = ''
-    country  = None
+    apiKey    = ''
+    country   = None
+    language  = ''
+    waitState = ''
+    lastQuery = ''
 
     text = {
             'FR': {
@@ -34,6 +37,7 @@ class WeatherWunderground():
                 'keyError':['Mauvaise clef API Wunderground.'],
                 'kph'    : 'kilomètre heure',
                 'noWind' : 'pas de vent',
+                'repeatState': ['Je ne trouve pas, quel département ?'],
                 'wind'   : 'vent',
                 'windDir': {
                         'north'    : 'de Nord',
@@ -167,8 +171,6 @@ class WeatherWunderground():
        }
 
     def __init__(self, configFile='config.json'):
-        self.waitState = False
-
         # Load config
         if configFile == 'config.json':
             configFile = os.path.join(os.path.dirname(__file__), 'config.json')
@@ -181,23 +183,67 @@ class WeatherWunderground():
             self.language = config['weatherWunderground'].get('language', 'FR')
             self.country  = config['weatherWunderground'].get('country', None)
 
-    def process(self, entities):
-        if entities.get('location', None) is None:
-            return {
-                    'keepRunning': True,
-                    'speech': self.text[self.language]['locationRequired']
-                    }
+    def getCityByState(self, states):
+        stateNumber = None
+        endpoint    = None
+        # Get city endpoint
+        statesDictReverse = {}
+        regex = re.compile('[^%s]' % string.ascii_letters)
+        for k, v in self.statesDict[self.language].items():
+            v = regex.sub('', v)
+            statesDictReverse[v] = k
+        for state in states.split(' '):
+            try:
+                state = regex.sub('', state)
+                stateNumber = statesDictReverse[state]
+                break
+            except KeyError:
+                pass
+        if stateNumber is None:
+            return None
+        for cityData in self.lastQuery['response']['results']:
+            if cityData['state'] == stateNumber:
+                endpoint = cityData['l']
+                break
+        if endpoint is None:
+            return None
 
         # Prepare query
         url = 'http://api.wunderground.com/api/'
         url += self.apiKey
         url += '/conditions/lang:'
         url += self.language
-        url += '/q/'
-        if self.country is not None:
-            url += self.country + '/'
-        url += entities.get('location')
+        url += endpoint
         url += '.json'
+        
+        return url
+
+
+    def process(self, entities, lastRequest=None):
+        if self.waitState == 'homonyms':
+            url = self.getCityByState(entities['state'])
+            if url is None:
+                return {
+                        'keepRunning': True,
+                        'speech': self.text[self.language]['repeatState'][0]
+                        }
+        
+        elif entities.get('location', None) is None:
+            return {
+                    'keepRunning': True,
+                    'speech': self.text[self.language]['locationRequired']
+                    }
+        else:
+            # Prepare query
+            url = 'http://api.wunderground.com/api/'
+            url += self.apiKey
+            url += '/conditions/lang:'
+            url += self.language
+            url += '/q/'
+            if self.country is not None:
+                url += self.country + '/'
+            url += entities.get('location')
+            url += '.json'
         logging.info('WEATHER -- url: %s', url)
 
         # Call Wunderground server
@@ -220,15 +266,17 @@ class WeatherWunderground():
             else:
                 return {'speech': self.text[self.language]['error'][0]}
 
+        self.lastQuery = r.json()
+        
         # Check if homonyms are found
         if 'results' in r.json()['response']:
-            self.waitState = True
             speech = (self.text[self.language]['cityHomonyms'][randint(0, 1)]
                           .replace('/CITY/', entities.get('location'))
                       )
             speech += ' '
             for city in r.json()['response']['results']:
                 speech += self.statesDict[self.language][city['state']] + ', '
+            self.waitState = 'homonyms'
             return {'keepRunning': True, 'speech': speech}
 
         # Extract data
@@ -258,4 +306,5 @@ class WeatherWunderground():
                 )
         speech += '.'
         logging.info('WEATHER -- speech: %s', speech)
+        self.waitState = 'weather'
         return {'keepRunning': True, 'speech': speech}

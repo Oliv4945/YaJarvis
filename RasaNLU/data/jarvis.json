@@ -10,6 +10,10 @@
       {
         "value": "temperature",
         "synonyms": ["chaud", "froid", "temperature"]
+      },
+      {
+	"value": "Isère",
+	"synonyms": ["Isère", "isère", "Isere", "isere"]
       }
     ],
     "common_examples": [
@@ -78,13 +82,54 @@
         "intent": "weather",
         "entities":[
           {
-            "start": 14,
-            "end": 19,
+            "start": 5,
+            "end": 10,
             "value": "temps",
             "entity": "weatherType"
-          }
-
+          },
+	  {
+            "start": 21,
+	    "end": 26,
+	    "value": "Paris",
+            "entity": "location"
+	  }
         ] 
+      },
+      {
+        "text": "Isère",
+	"intent": "all",
+	"entities":[
+          {
+            "start": 0,
+	    "end": 5,
+	    "value": "Isère",
+	    "entity": "state"
+	  }
+        ]
+      },
+      {
+        "text": "En Isère",
+	"intent": "all",
+	"entities":[
+          {
+            "start": 3,
+	    "end": 8,
+	    "value": "Isère",
+	    "entity": "state"
+	  }
+        ]
+      },
+      {
+        "text": "Dans l'Isère",
+	"intent": "all",
+	"entities":[
+          {
+            "start": 7,
+	    "end": 12,
+	    "value": "Isère",
+	    "entity": "state"
+	  }
+        ]
       },
       {
         "text": "quelle est la meteo",
@@ -131,7 +176,7 @@
       },
       {
         "text": "Quelle est la météo à Gap",
-        "intent": "weatherType",
+        "intent": "weather",
         "entities": [
           {
             "start": 14,
