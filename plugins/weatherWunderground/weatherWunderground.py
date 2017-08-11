@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
+import logging
 import os
-import pprint
 from random import randint
 import re
 import requests
@@ -198,13 +198,11 @@ class WeatherWunderground():
             url += self.country + '/'
         url += entities.get('location')
         url += '.json'
-        print('WEATHER - url:', url)
+        logging.info('WEATHER -- url: %s', url)
 
         # Call Wunderground server
         r = requests.get(url)
-        pp = pprint.PrettyPrinter(indent=4)
-        print('WEATHER - Wunderground JSON')
-        pp.pprint(r.json())
+        logging.debug('WEATHER -- Wunderground JSON: %s', r.json())
 
         # Check for errors
         if 'error' in r.json()['response']:
@@ -259,5 +257,5 @@ class WeatherWunderground():
                 '.', ' %s ' % self.text[self.language]['decimalSeparator']
                 )
         speech += '.'
-        print('WEATHER - speech:', speech)
+        logging.info('WEATHER -- speech: %s', speech)
         return {'keepRunning': True, 'speech': speech}

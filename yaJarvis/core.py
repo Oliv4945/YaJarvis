@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from . import log
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import parse_qs
-import sys
-import json
 import importlib
+import json
+import logging
 import requests
 import pprint
 from plugins import *
@@ -59,8 +60,8 @@ class MyHandler(BaseHTTPRequestHandler):
         entities = {}
         for entity in r.json()['entities']:
             entities[entity['entity']] = entity['value']
-        print('CORE - intent:', intent)
-        print('CORE - entities:', entities)
+        logging.info('CORE -- intent: %s', intent)
+        logging.info('CORE -- entities: %s', entities)
 
         # Call module
         message = getattr(self.pluginsList, intent['name']).process(entities)
