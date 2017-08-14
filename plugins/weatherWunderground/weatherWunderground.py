@@ -183,7 +183,7 @@ class WeatherWunderground():
             self.language = config['weatherWunderground'].get('language', 'FR')
             self.country  = config['weatherWunderground'].get('country', None)
 
-    def getCityByState(self, states):
+    def getWeatherFromState(self, states):
         stateNumber = None
         endpoint    = None
         # Get city endpoint
@@ -215,19 +215,19 @@ class WeatherWunderground():
         url += self.language
         url += endpoint
         url += '.json'
-        
+
         return url
 
 
     def process(self, entities, currentIntent=None, lastRequest=None):
         if currentIntent == 'all' and self.waitState == 'homonyms':
-            url = self.getCityByState(entities['state'])
+            url = self.getWeatherFromState(entities['state'])
             if url is None:
                 return {
                         'keepRunning': True,
                         'speech': self.text[self.language]['repeatState'][0]
                         }
-        
+
         elif entities.get('location', None) is None:
             return {
                     'keepRunning': True,
@@ -267,7 +267,7 @@ class WeatherWunderground():
                 return {'speech': self.text[self.language]['error'][0]}
 
         self.lastQuery = r.json()
-        
+
         # Check if homonyms are found
         if 'results' in r.json()['response']:
             speech = (self.text[self.language]['cityHomonyms'][randint(0, 1)]
