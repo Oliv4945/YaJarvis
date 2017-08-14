@@ -1,4 +1,6 @@
+coverage
 pytest
+pytest-coverage
 requests
 requests_mock
 rasa_nlu
