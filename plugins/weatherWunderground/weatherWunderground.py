@@ -196,7 +196,7 @@ class WeatherWunderground():
         url += '.json'
         return url
 
-    def getWeatherFromState(self, states):
+    def getWeatherFromState(self, state):
         stateNumber = None
         endpoint    = None
         # Get city endpoint
@@ -205,13 +205,12 @@ class WeatherWunderground():
         for k, v in self.statesDict[self.language].items():
             v = regex.sub('', v)
             statesDictReverse[v] = k
-        for state in states.split(' '):
-            try:
-                state = regex.sub('', state)
-                stateNumber = statesDictReverse[state]
-                break
-            except KeyError:
-                pass
+        try:
+            state = regex.sub('', state)
+            stateNumber = statesDictReverse[state]
+            #break
+        except KeyError:
+            pass
         if stateNumber is None:
             return None
         for cityData in self.lastQuery['response']['results']:
