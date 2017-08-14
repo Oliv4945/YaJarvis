@@ -183,6 +183,19 @@ class WeatherWunderground():
             self.language = config['weatherWunderground'].get('language', 'FR')
             self.country  = config['weatherWunderground'].get('country', None)
 
+    def getWeatherBycity(self, city):
+        # Prepare query
+        url = 'http://api.wunderground.com/api/'
+        url += self.apiKey
+        url += '/conditions/lang:'
+        url += self.language
+        url += '/q/'
+        if self.country is not None:
+            url += self.country + '/'
+        url += city
+        url += '.json'
+        return url
+
     def getWeatherFromState(self, states):
         stateNumber = None
         endpoint    = None
@@ -215,9 +228,38 @@ class WeatherWunderground():
         url += self.language
         url += endpoint
         url += '.json'
-
         return url
 
+    def parseWeather(self, data):
+        # Extract data
+        temp_c   = data['current_observation']['temp_c']
+        wind_kph = data['current_observation']['wind_kph']
+        wind_dir = data['current_observation']['wind_dir']
+
+        # Parse wind
+        try:
+            wind_dir = self.windDirDict[wind_dir]
+            wind_dir = self.text[self.language]['windDir'][wind_dir]
+        except KeyError:
+            wind_dir = data['current_observation']['wind_dir']
+
+        # Build answer
+        speech = data['current_observation']['weather'] + ', '
+        speech += str(temp_c) + ' '
+        speech += self.text[self.language]['degrees'] + ', '
+        if (wind_kph > 0):
+            speech += self.text[self.language]['wind'] + ' ' + wind_dir + ', '
+            speech += str(wind_kph) + ' '
+            speech += self.text[self.language]['kph']
+        else:
+            speech += self.text[self.language]['noWind']
+        speech.replace(
+                '.', ' %s ' % self.text[self.language]['decimalSeparator']
+                )
+        speech += '.'
+        logging.info('WEATHER -- speech: %s', speech)
+        self.waitState = 'weather'
+        return {'keepRunning': True, 'speech': speech}
 
     def process(self, entities, currentIntent=None, lastRequest=None):
         if currentIntent == 'all' and self.waitState == 'homonyms':
@@ -234,16 +276,7 @@ class WeatherWunderground():
                     'speech': self.text[self.language]['locationRequired']
                     }
         else:
-            # Prepare query
-            url = 'http://api.wunderground.com/api/'
-            url += self.apiKey
-            url += '/conditions/lang:'
-            url += self.language
-            url += '/q/'
-            if self.country is not None:
-                url += self.country + '/'
-            url += entities.get('location')
-            url += '.json'
+            url = self.getWeatherBycity(entities.get('location'))
         logging.info('WEATHER -- url: %s', url)
 
         # Call Wunderground server
@@ -279,32 +312,5 @@ class WeatherWunderground():
             self.waitState = 'homonyms'
             return {'keepRunning': True, 'speech': speech}
 
-        # Extract data
-        temp_c   = r.json()['current_observation']['temp_c']
-        wind_kph = r.json()['current_observation']['wind_kph']
-        wind_dir = r.json()['current_observation']['wind_dir']
-
-        # Parse wind
-        try:
-            wind_dir = self.windDirDict[wind_dir]
-            wind_dir = self.text[self.language]['windDir'][wind_dir]
-        except KeyError:
-            wind_dir = r.json()['current_observation']['wind_dir']
-
-        # Build answer
-        speech = r.json()['current_observation']['weather'] + ', '
-        speech += str(temp_c) + ' '
-        speech += self.text[self.language]['degrees'] + ', '
-        if (wind_kph > 0):
-            speech += self.text[self.language]['wind'] + ' ' + wind_dir + ', '
-            speech += str(wind_kph) + ' '
-            speech += self.text[self.language]['kph']
-        else:
-            speech += self.text[self.language]['noWind']
-        speech.replace(
-                '.', ' %s ' % self.text[self.language]['decimalSeparator']
-                )
-        speech += '.'
-        logging.info('WEATHER -- speech: %s', speech)
-        self.waitState = 'weather'
-        return {'keepRunning': True, 'speech': speech}
+        # Code refactoring
+        return self.parseWeather(r.json())
