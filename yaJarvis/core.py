@@ -14,8 +14,9 @@ from plugins import *
 
 class PluginsList():
     pluginsList = {
-            'weather': weatherWunderground.WeatherWunderground
-          }
+            'weather': weatherWunderground.WeatherWunderground,
+            'timeDate': timeDate.TimeDate
+    }
 
     def __init__(self):
         for key, module in self.pluginsList.items():
@@ -98,7 +99,7 @@ def run():
     httpd = HTTPServer(server_address, MyHandler)
     MyHandler.pluginsList = PluginsList()
     MyHandler.lastRequest = { 'intent': { 'name': ''}}
-    
+
     try:
         logging.info('CORE - Running Jarvis backend')
         httpd.serve_forever()

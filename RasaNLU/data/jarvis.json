@@ -18,38 +18,38 @@
     ],
     "common_examples": [
       {
-        "text": "hey", 
-        "intent": "greet", 
+        "text": "hey",
+        "intent": "greet",
         "entities": []
-      }, 
+      },
       {
-        "text": "salut", 
-        "intent": "greet", 
+        "text": "salut",
+        "intent": "greet",
         "entities": []
-      }, 
+      },
       {
         "text": "bonjour",
-        "intent": "greet", 
+        "intent": "greet",
         "entities": []
-      }, 
+      },
       {
-        "text": "hello", 
-        "intent": "greet", 
+        "text": "hello",
+        "intent": "greet",
         "entities": []
-      }, 
+      },
       {
-        "text": "yes", 
-        "intent": "affirm", 
+        "text": "yes",
+        "intent": "affirm",
         "entities": []
-      }, 
+      },
       {
-        "text": "yep", 
-        "intent": "affirm", 
+        "text": "yep",
+        "intent": "affirm",
         "entities": []
-      }, 
+      },
       {
-        "text": "oui", 
-        "intent": "affirm", 
+        "text": "oui",
+        "intent": "affirm",
         "entities": []
       },
       {
@@ -93,7 +93,7 @@
 	    "value": "Paris",
             "entity": "location"
 	  }
-        ] 
+        ]
       },
       {
         "text": "Isère",
@@ -142,7 +142,7 @@
             "entity": "weatherType"
           }
 
-        ] 
+        ]
       },
       {
         "text": "quel temps fait il",
@@ -211,30 +211,66 @@
         ]
       },
       {
-        "text": "bye", 
-        "intent": "goodbye", 
+        "text": "bye",
+        "intent": "goodbye",
         "entities": []
-      }, 
+      },
       {
-        "text": "aurevoir", 
-        "intent": "goodbye", 
+        "text": "aurevoir",
+        "intent": "goodbye",
         "entities": []
-      }, 
+      },
       {
-        "text": "a+", 
-        "intent": "goodbye", 
+        "text": "a+",
+        "intent": "goodbye",
         "entities": []
-      }, 
+      },
       {
-        "text": "stop", 
-        "intent": "goodbye", 
+        "text": "stop",
+        "intent": "goodbye",
         "entities": []
-      }, 
+      },
       {
-        "text": "fin", 
-        "intent": "goodbye", 
+        "text": "fin",
+        "intent": "goodbye",
         "entities": []
-      }
+      },
+      {
+         "text": "Quelle heure est-il",
+         "intent": "timeDate",
+         "entities": [
+             {
+               "start": 7,
+               "end": 12,
+               "value": "heure",
+               "entity": "time"
+             }
+         ]
+       },
+       {
+          "text": "Quelle heure est il",
+          "intent": "timeDate",
+          "entities": [
+              {
+                "start": 7,
+                "end": 12,
+                "value": "heure",
+                "entity": "time"
+              }
+          ]
+       },
+       {
+          "text": "Quelle est l'heure",
+          "intent": "timeDate",
+          "entities": [
+              {
+                "start": 13,
+                "end": 18,
+                "value": "heure",
+                "entity": "time"
+              }
+          ]
+       }
     ]
   }
 }

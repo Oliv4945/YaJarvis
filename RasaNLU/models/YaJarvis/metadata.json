@@ -1,8 +1,12 @@
 {
-    "training_data": "training_data.json",
+    "language": "fr",
+    "regex_featurizer": "regex_featurizer.json",
+    "spacy_model_name": "fr",
+    "entity_synonyms": "entity_synonyms.json",
     "entity_extractor_crf": {
-        "model_file": "crf_model.pkl",
         "BILOU_flag": true,
+        "model_file": "crf_model.pkl",
+        "version": 1,
         "crf_features": [
             [
                 "low",
@@ -30,11 +34,13 @@
                 "pos",
                 "pos2"
             ]
-        ],
-        "version": 1
+        ]
     },
-    "trained_at": "20170815-220803",
-    "spacy_model_name": "fr",
+    "intent_classifier_sklearn": "intent_classifier.pkl",
+    "training_data": "training_data.json",
+    "ner_duckling_persisted": "ner_duckling.json",
+    "trained_at": "20170815-232254",
+    "rasa_nlu_version": "0.9.1",
     "pipeline": [
         "nlp_spacy",
         "tokenizer_spacy",
@@ -45,11 +51,5 @@
         "intent_classifier_sklearn",
         "ner_spacy",
         "ner_duckling"
-    ],
-    "rasa_nlu_version": "0.9.1",
-    "language": "fr",
-    "entity_synonyms": "entity_synonyms.json",
-    "intent_classifier_sklearn": "intent_classifier.pkl",
-    "regex_featurizer": "regex_featurizer.json",
-    "ner_duckling_persisted": "ner_duckling.json"
+    ]
 }
