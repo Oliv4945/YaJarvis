@@ -9,220 +9,220 @@
     "common_examples": [
       {
         "text": "hey",
-        "intent": "greet",
-        "entities": []
+        "entities": [],
+        "intent": "greet"
       },
       {
         "text": "salut",
-        "intent": "greet",
-        "entities": []
+        "entities": [],
+        "intent": "greet"
       },
       {
         "text": "bonjour",
-        "intent": "greet",
-        "entities": []
+        "entities": [],
+        "intent": "greet"
       },
       {
         "text": "hello",
-        "intent": "greet",
-        "entities": []
+        "entities": [],
+        "intent": "greet"
       },
       {
         "text": "yes",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "yep",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "oui",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "ok",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "bien",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "bien, merci",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "correct",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "bon choix",
-        "intent": "affirm",
-        "entities": []
+        "entities": [],
+        "intent": "affirm"
       },
       {
         "text": "Quel temps fait-il \u00e0 Paris",
-        "intent": "weather",
         "entities": [
           {
+            "start": 5,
             "entity": "weatherType",
             "end": 10,
-            "start": 5,
             "value": "temps"
           },
           {
+            "start": 21,
             "entity": "location",
             "end": 26,
-            "start": 21,
             "value": "Paris"
           }
-        ]
+        ],
+        "intent": "weather"
       },
       {
         "text": "Is\u00e8re",
-        "intent": "all",
         "entities": [
           {
+            "start": 0,
             "entity": "state",
             "end": 5,
-            "start": 0,
             "value": "Is\u00e8re"
           }
-        ]
+        ],
+        "intent": "all"
       },
       {
         "text": "En Is\u00e8re",
-        "intent": "all",
         "entities": [
           {
+            "start": 3,
             "entity": "state",
             "end": 8,
-            "start": 3,
             "value": "Is\u00e8re"
           }
-        ]
+        ],
+        "intent": "all"
       },
       {
         "text": "Dans l'Is\u00e8re",
-        "intent": "all",
         "entities": [
           {
+            "start": 7,
             "entity": "state",
             "end": 12,
-            "start": 7,
             "value": "Is\u00e8re"
           }
-        ]
+        ],
+        "intent": "all"
       },
       {
         "text": "quelle est la meteo",
-        "intent": "weather",
         "entities": [
           {
+            "start": 14,
             "entity": "weatherType",
             "end": 19,
-            "start": 14,
             "value": "meteo"
           }
-        ]
+        ],
+        "intent": "weather"
       },
       {
         "text": "quel temps fait il",
-        "intent": "weather",
         "entities": [
           {
+            "start": 5,
             "entity": "weatherType",
             "end": 10,
-            "start": 5,
             "value": "temps"
           }
-        ]
+        ],
+        "intent": "weather"
       },
       {
         "text": "Quelle est la meteo \u00e0 Grenoble",
-        "intent": "weather",
         "entities": [
           {
+            "start": 14,
             "entity": "weatherType",
             "end": 19,
-            "start": 14,
             "value": "meteo"
           },
           {
+            "start": 22,
             "entity": "location",
             "end": 30,
-            "start": 22,
             "value": "Grenoble"
           }
-        ]
+        ],
+        "intent": "weather"
       },
       {
         "text": "Quelle est la m\u00e9t\u00e9o \u00e0 Gap",
-        "intent": "weather",
         "entities": [
           {
+            "start": 14,
             "entity": "weatherType",
             "end": 19,
-            "start": 14,
             "value": "meteo"
           },
           {
+            "start": 22,
             "entity": "location",
             "end": 25,
-            "start": 22,
             "value": "Gap"
           }
-        ]
+        ],
+        "intent": "weather"
       },
       {
         "text": "Quel temps fait il \u00e0 Grenoble",
-        "intent": "weather",
         "entities": [
           {
+            "start": 5,
             "entity": "weatherType",
             "end": 10,
-            "start": 5,
             "value": "temps"
           },
           {
+            "start": 21,
             "entity": "location",
             "end": 29,
-            "start": 21,
             "value": "Grenoble"
           }
-        ]
+        ],
+        "intent": "weather"
       },
       {
         "text": "bye",
-        "intent": "goodbye",
-        "entities": []
+        "entities": [],
+        "intent": "goodbye"
       },
       {
         "text": "aurevoir",
-        "intent": "goodbye",
-        "entities": []
+        "entities": [],
+        "intent": "goodbye"
       },
       {
         "text": "a+",
-        "intent": "goodbye",
-        "entities": []
+        "entities": [],
+        "intent": "goodbye"
       },
       {
         "text": "stop",
-        "intent": "goodbye",
-        "entities": []
+        "entities": [],
+        "intent": "goodbye"
       },
       {
         "text": "fin",
-        "intent": "goodbye",
-        "entities": []
+        "entities": [],
+        "intent": "goodbye"
       }
     ]
   }
